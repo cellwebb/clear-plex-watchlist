@@ -21,18 +21,38 @@ The project uses a `uv.lock` file to ensure reproducible dependency installation
 
 ## Configuration
 
-Set the following environment variables:
+### Environment Variables
 
+You can configure the application using environment variables in two ways:
+
+#### Option 1: Environment Variables
 ```bash
 export PLEX_USERNAME="your_plex_username"
 export PLEX_PASSWORD="your_plex_password"
 ```
+
+#### Option 2: .env File (Recommended)
+Create a `.env` file in the project root:
+
+```bash
+# Copy the example file
+cp .env.example .env
+
+# Edit with your credentials
+PLEX_USERNAME=your_plex_username
+PLEX_PASSWORD=your_plex_password
+```
+
+The application will automatically load variables from the `.env` file if present.
 
 ## Usage
 
 The utility can be run in several ways:
 
 ```bash
+# Using make (recommended)
+make run
+
 # Using the installed command (after installation)
 clear-plex-watchlist
 
@@ -61,28 +81,27 @@ This project uses:
 
 ### Makefile Commands
 
+Run `make help` to see all available commands:
+
 ```bash
-# Setup development environment
-make setup
+# Show help
+make help
 
-# Format code
-make format
+# Development setup
+make setup    # Install dependencies using uv sync
+make install  # Alias for setup
+make lock     # Create/update uv.lock file
 
-# Lint code
-make lint
+# Code quality
+make format   # Format code using ruff
+make lint     # Lint code using ruff
 
-# Run tests
-make test
+# Testing
+make test     # Run tests with pytest
 
-# Clean build artifacts
-make clean
+# Application
+make run      # Run the application
 
-# Create or update uv.lock file
-make lock
-
-# Install dependencies using uv sync
-make install
-
-# Install dev dependencies using uv sync
-make install-dev
+# Cleanup
+make clean    # Remove build artifacts and caches
 ```
