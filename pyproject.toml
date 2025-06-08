@@ -14,6 +14,7 @@ authors = [
 ]
 dependencies = [
     "plexapi>=4.15.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]

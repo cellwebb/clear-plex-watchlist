@@ -1,4 +1,4 @@
-.PHONY: setup format lint test clean sync lock
+.PHONY: setup format lint test clean sync lock run
 
 # Setup development environment
 setup:
@@ -33,3 +33,7 @@ install:
 # Create/update uv.lock file
 lock:
 	uv lock
+
+# Run the application
+run:
+	uv run python -m clear_plex_watchlist

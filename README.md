@@ -44,6 +44,7 @@ python clear-plex-watchlist.py
 ```
 
 The script will:
+
 1. Authenticate with your Plex account
 2. Connect to your first available Plex server
 3. Fetch all items in your watchlist

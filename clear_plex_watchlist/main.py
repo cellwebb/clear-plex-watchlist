@@ -2,6 +2,7 @@ import logging
 import os
 from typing import Tuple
 
+from dotenv import load_dotenv
 from plexapi.exceptions import BadRequest, NotFound
 from plexapi.myplex import MyPlexAccount
 from plexapi.video import Video
@@ -31,6 +32,7 @@ def remove_watchlist_item(item: Video) -> bool:
 
 def clear_plex_watchlist() -> None:
     """Clear all items from Plex watchlist."""
+    load_dotenv()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     try:
