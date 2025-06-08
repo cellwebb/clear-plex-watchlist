@@ -37,9 +37,5 @@ line-ending = "auto"
 [tool.pytest]
 testpaths = ["tests"]
 
-[tool.hatch.build.targets.wheel]
-sources = ["clear-plex-watchlist.py"]
-forces = ["clear_plex_watchlist = clear-plex-watchlist:clear_plex_watchlist"]
-
 [project.scripts]
 clear-plex-watchlist = "clear_plex_watchlist:clear_plex_watchlist"

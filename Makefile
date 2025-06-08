@@ -30,10 +30,6 @@ clean:
 install:
 	uv sync
 
-# Install dev dependencies using uv sync
-install-dev:
-	uv sync
-
 # Create/update uv.lock file
 lock:
 	uv lock
