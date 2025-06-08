@@ -1,45 +1,57 @@
 
 import os
+import logging
+from typing import List, Optional
+
 from plexapi.myplex import MyPlexAccount
 from plexapi.exceptions import BadRequest, NotFound
+from plexapi.video import Video
 
 
-def clear_plex_watchlist():
-    """Clear all items from Plex watchlist."""
-    
-    # Get credentials from environment variables
+def get_plex_credentials() -> tuple[str, str]:
+    """Retrieve and validate Plex credentials from environment variables."""
     username = os.getenv('PLEX_USERNAME')
     password = os.getenv('PLEX_PASSWORD')
     
     if not username or not password:
         raise ValueError("Set PLEX_USERNAME and PLEX_PASSWORD environment variables")
     
+    return username, password
+
+
+def remove_watchlist_item(item: Video) -> bool:
+    """Remove a single item from the watchlist and return success status."""
     try:
-        # Connect to Plex account
+        item.removeFromWatchlist()
+        logging.info(f"Removed: {item.title}")
+        return True
+    except (BadRequest, NotFound) as e:
+        logging.error(f"Failed to remove {item.title}: {e}")
+        return False
+
+
+def clear_plex_watchlist() -> None:
+    """Clear all items from Plex watchlist."""
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+    
+    try:
+        username, password = get_plex_credentials()
         account = MyPlexAccount(username, password)
-        print(f"Connected to Plex account: {account.username}")
+        logging.info(f"Connected to Plex account: {account.username}")
         
-        # Get watchlist
         watchlist = account.watchlist()
         
         if not watchlist:
-            print("Watchlist is already empty")
+            logging.info("Watchlist is already empty")
             return
         
-        print(f"Found {len(watchlist)} items in watchlist")
+        logging.info(f"Found {len(watchlist)} items in watchlist")
         
-        # Remove each item
-        for item in watchlist:
-            try:
-                item.removeFromWatchlist()
-                print(f"Removed: {item.title}")
-            except (BadRequest, NotFound) as e:
-                print(f"Failed to remove {item.title}: {e}")
-        
-        print("Watchlist cleared successfully")
+        success_count = sum(remove_watchlist_item(item) for item in watchlist)
+        logging.info(f"Removed {success_count} of {len(watchlist)} items successfully")
         
     except Exception as e:
-        print(f"Error: {e}")
+        logging.error(f"Error: {e}")
         raise
 
 
