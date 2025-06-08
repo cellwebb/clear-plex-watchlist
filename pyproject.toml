@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clear_plex_watchlist"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A utility to clear Plex watchlists efficiently"
 readme = "README.md"
 requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
-    {name = "Developer"}
+    { name = "cellwebb", email = "cellwebb@users.noreply.github.com" },
 ]
 dependencies = [
     "plexapi>=4.15.0",
@@ -39,3 +39,6 @@ testpaths = ["tests"]
 
 [project.scripts]
 clear-plex-watchlist = "clear_plex_watchlist:clear_plex_watchlist"
+
+[tool.hatch.version]
+path = "clear_plex_watchlist/__version__.py"
