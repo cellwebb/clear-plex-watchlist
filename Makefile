@@ -2,7 +2,7 @@
 
 # Setup development environment
 setup:
-	uv sync -e ".[dev]"
+	uv sync
 
 # Format code using ruff
 format:
@@ -28,11 +28,11 @@ clean:
 
 # Install dependencies using uv sync
 install:
-	uv sync -e .
+	uv sync
 
 # Install dev dependencies using uv sync
 install-dev:
-	uv sync -e ".[dev]"
+	uv sync
 
 # Create/update uv.lock file
 lock:

@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "clear-plex-watchlist"
+name = "clear_plex_watchlist"
 version = "0.1.0"
 description = "A utility to clear Plex watchlists efficiently"
 readme = "README.md"
@@ -36,3 +36,10 @@ line-ending = "auto"
 
 [tool.pytest]
 testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+sources = ["clear-plex-watchlist.py"]
+forces = ["clear_plex_watchlist = clear-plex-watchlist:clear_plex_watchlist"]
+
+[project.scripts]
+clear-plex-watchlist = "clear_plex_watchlist:clear_plex_watchlist"

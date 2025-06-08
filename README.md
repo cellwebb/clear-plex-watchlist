@@ -5,13 +5,7 @@ A utility to clear Plex watchlists efficiently.
 ## Installation
 
 ```bash
-uv sync .
-```
-
-Or with development dependencies:
-
-```bash
-uv sync ".[dev]"
+uv sync
 ```
 
 The project uses a `uv.lock` file to ensure reproducible dependency installations across environments.
